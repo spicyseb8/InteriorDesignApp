@@ -1,0 +1,201 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>3D Interior Design Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #FFFFFF;
+            overflow-x: hidden;
+        }
+        /* Full width carousel container - NO padding, NO margins */
+        .carousel-wrapper {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+        .carousel-container {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .btn-primary {
+            background-color: #FA8112;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #e6730f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(250, 129, 18, 0.3);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        .carousel-dot {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .carousel-dot.active {
+            width: 24px;
+            background-color: #FA8112;
+        }
+        .carousel-dot.inactive {
+            width: 8px;
+            background-color: #CCCCCC;
+        }
+        /* Content padding - only for text content, NOT for carousel */
+        .content-padding {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- App Title - with padding -->
+    <div class="content-padding text-center pt-8 pb-4">
+        <h1 class="text-4xl font-bold text-[#222222] tracking-tight">3D Interior Design</h1>
+        <p class="text-[#666666] text-sm mt-2">Plan. Visualize. Budget.</p>
+    </div>
+    
+    <!-- Full Width Carousel - NO padding, stretches edge to edge -->
+    <div class="carousel-wrapper">
+        <div class="carousel-container">
+            <div class="carousel-slide active">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&h=800&fit=crop" alt="Modern Living Room">
+            </div>
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&h=800&fit=crop" alt="Modern Kitchen">
+            </div>
+
+            <!-- Carousel Indicators -->
+            <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
+                <button class="carousel-dot active w-6 h-2 rounded-full bg-[#FA8112] transition-all" data-index="0"></button>
+                <button class="carousel-dot inactive w-2 h-2 rounded-full bg-[#CCCCCC] transition-all" data-index="1"></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Welcome Text - with padding back -->
+    <div class="content-padding text-center pt-8 pb-6">
+        <h2 class="text-xl font-semibold text-[#222222] mb-2">Welcome to Your Interior Design Partner</h2>
+        <p class="text-[#666666] text-sm leading-relaxed">
+            Create your dream space with our 3D visualization tool. 
+            Choose furniture, materials, and get instant cost estimates.
+        </p>
+    </div>
+    
+    <!-- Get Started Button - with padding -->
+    <div class="content-padding pb-8">
+        <button onclick="window.location.href='/Account/SignIn'" class="btn-primary w-full text-white py-3 rounded-xl font-semibold shadow-sm transition-all">
+            Get Started
+        </button>
+    </div>
+    
+    <script>
+        var currentSlide = 0;
+        var slides = document.querySelectorAll('.carousel-slide');
+        var dots = document.querySelectorAll('.carousel-dot');
+        var totalSlides = slides.length;
+        var autoInterval;
+        
+        function showSlide(index) {
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+                dots[i].classList.remove('active');
+                dots[i].classList.add('inactive');
+                dots[i].style.width = '8px';
+            }
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            dots[index].classList.remove('inactive');
+            dots[index].style.width = '24px';
+            
+            currentSlide = index;
+        }
+        
+        function nextSlide() {
+            var next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+        
+        function startAutoPlay() {
+            autoInterval = setInterval(nextSlide, 4000);
+        }
+        
+        function stopAutoPlay() {
+            if (autoInterval) {
+                clearInterval(autoInterval);
+            }
+        }
+        
+        for (var i = 0; i < dots.length; i++) {
+            dots[i].addEventListener('click', function() {
+                var index = parseInt(this.getAttribute('data-index'));
+                stopAutoPlay();
+                showSlide(index);
+                startAutoPlay();
+            });
+        }
+        
+        startAutoPlay();
+        
+        var carousel = document.querySelector('.carousel-container');
+        carousel.addEventListener('mouseenter', stopAutoPlay);
+        carousel.addEventListener('mouseleave', startAutoPlay);
+        
+        // Touch swipe support
+        var touchStartX = 0;
+        var touchEndX = 0;
+        
+        carousel.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoPlay();
+        });
+        
+        carousel.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) {
+                nextSlide();
+            } else if (touchEndX > touchStartX + 50) {
+                var prev = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(prev);
+            }
+            startAutoPlay();
+        });
+    </script>
+</body>
+</html>

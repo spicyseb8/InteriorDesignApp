@@ -1,0 +1,232 @@
+@using InteriorDesignApp.Models
+@model User
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Edit Profile - 3D Interior Design Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #FFFFFF;
+        }
+        .btn-primary {
+            background-color: #FA8112;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #e6730f;
+            box-shadow: 0 4px 12px rgba(250, 129, 18, 0.3);
+        }
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+        .btn-secondary {
+            background-color: #F8F9FA;
+            border: 1px solid #E8E8E8;
+            color: #666666;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            border-color: #FA8112;
+            color: #FA8112;
+        }
+        input:focus {
+            outline: none;
+            border-color: #FA8112;
+            box-shadow: 0 0 0 3px rgba(250, 129, 18, 0.1);
+        }
+        .input-field {
+            border: 1px solid #E8E8E8;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #FA8112;
+        }
+        .password-section {
+            display: none;
+        }
+        .password-section.show {
+            display: block;
+        }
+        /* Hide browser's native password reveal button */
+        input::-ms-reveal,
+        input::-ms-clear {
+            display: none;
+        }
+        input[type="password"]::-webkit-credentials-auto-fill-button,
+        input[type="password"]::-webkit-caps-lock-indicator {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen">
+        <!-- Header -->
+        <div class="px-5 pt-8 pb-4">
+            <div class="flex items-center">
+                <a href="/Design/Settings" class="mr-4 text-[#666666] hover:text-[#FA8112] transition-colors">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </a>
+                <h1 class="text-2xl font-bold text-[#222222]">Edit Profile</h1>
+            </div>
+        </div>
+        
+        <div class="px-5 py-2 pb-24">
+            @if (TempData["Success"] != null)
+            {
+                <div class="mb-4 p-3 bg-green-50 border border-green-200 text-green-600 rounded-xl text-sm">
+                    <i class="fas fa-check-circle mr-2"></i> @TempData["Success"]
+                </div>
+            }
+            
+            @if (TempData["Error"] != null)
+            {
+                <div class="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm">
+                    <i class="fas fa-exclamation-circle mr-2"></i> @TempData["Error"]
+                </div>
+            }
+            
+            <form method="post" action="/Design/UpdateProfile/@Model.Id">
+                @Html.AntiForgeryToken()
+                
+                <!-- Profile Picture Placeholder -->
+                <div class="flex justify-center mb-8">
+                    <div class="w-24 h-24 bg-[#FA8112]/10 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user-circle text-5xl text-[#FA8112]"></i>
+                    </div>
+                </div>
+                
+                <!-- Email (Read-only) -->
+                <div class="mb-5">
+                    <label class="block text-[#222222] text-sm font-semibold mb-2">Email Address</label>
+                    <div class="relative">
+                        <i class="fas fa-envelope absolute left-3 top-3 text-[#999999] text-sm"></i>
+                        <input type="email" value="@Model.Email" readonly 
+                               class="w-full pl-10 pr-3 py-2.5 border border-[#E8E8E8] rounded-xl bg-[#F8F9FA] text-[#666666] text-sm">
+                    </div>
+                    <p class="text-xs text-[#999999] mt-1">Email cannot be changed</p>
+                </div>
+                
+                <!-- Username -->
+                <div class="mb-5">
+                    <label class="block text-[#222222] text-sm font-semibold mb-2">Username</label>
+                    <div class="relative">
+                        <i class="fas fa-user absolute left-3 top-3 text-[#999999] text-sm"></i>
+                        <input type="text" name="username" value="@Model.Username" required 
+                               class="input-field w-full pl-10 pr-3 py-2.5 border rounded-xl focus:outline-none transition-all text-sm">
+                    </div>
+                </div>
+                
+                <!-- Change Password Button -->
+                <div class="mb-6">
+                    <button type="button" id="togglePasswordBtn" class="btn-secondary w-full rounded-xl py-3 font-semibold transition-all flex items-center justify-center space-x-2">
+                        <i class="fas fa-key"></i>
+                        <span>Change Password</span>
+                    </button>
+                </div>
+                
+                <!-- Change Password Section (Hidden by default) -->
+                <div id="passwordSection" class="password-section border-t border-[#F0F0F0] pt-6">
+                    <h3 class="text-base font-semibold text-[#222222] mb-4">Change Password</h3>
+                    
+                    <div class="mb-4">
+                        <label class="block text-[#222222] text-sm font-semibold mb-2">Current Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-3 top-3 text-[#999999] text-sm"></i>
+                            <input type="password" name="currentPassword" id="currentPassword"
+                                   class="input-field w-full pl-10 pr-10 py-2.5 border rounded-xl focus:outline-none transition-all text-sm">
+                            <i class="fas fa-eye-slash absolute right-3 top-3 text-[#999999] cursor-pointer hover:text-[#FA8112] transition-colors password-toggle" data-target="currentPassword"></i>
+                        </div>
+                        <p class="text-xs text-[#999999] mt-1">Required to change password</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-[#222222] text-sm font-semibold mb-2">New Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-3 top-3 text-[#999999] text-sm"></i>
+                            <input type="password" name="newPassword" id="newPassword"
+                                   class="input-field w-full pl-10 pr-10 py-2.5 border rounded-xl focus:outline-none transition-all text-sm">
+                            <i class="fas fa-eye-slash absolute right-3 top-3 text-[#999999] cursor-pointer hover:text-[#FA8112] transition-colors password-toggle" data-target="newPassword"></i>
+                        </div>
+                        <p class="text-xs text-[#999999] mt-1">Leave blank to keep current password (min. 6 characters)</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-[#222222] text-sm font-semibold mb-2">Confirm New Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-3 top-3 text-[#999999] text-sm"></i>
+                            <input type="password" name="confirmNewPassword" id="confirmNewPassword"
+                                   class="input-field w-full pl-10 pr-10 py-2.5 border rounded-xl focus:outline-none transition-all text-sm">
+                            <i class="fas fa-eye-slash absolute right-3 top-3 text-[#999999] cursor-pointer hover:text-[#FA8112] transition-colors password-toggle" data-target="confirmNewPassword"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary w-full text-white py-3 rounded-xl font-semibold transition-all mt-4">
+                    Save Changes
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle password section visibility
+        var toggleBtn = document.getElementById('togglePasswordBtn');
+        var passwordSection = document.getElementById('passwordSection');
+        var isPasswordVisible = false;
+        
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+                if (!isPasswordVisible) {
+                    passwordSection.classList.add('show');
+                    toggleBtn.innerHTML = '<i class="fas fa-times"></i><span>Cancel Password Change</span>';
+                    toggleBtn.classList.add('border-red-200', 'text-red-500');
+                    toggleBtn.style.borderColor = '#FECACA';
+                    toggleBtn.style.color = '#EF4444';
+                    isPasswordVisible = true;
+                } else {
+                    passwordSection.classList.remove('show');
+                    toggleBtn.innerHTML = '<i class="fas fa-key"></i><span>Change Password</span>';
+                    toggleBtn.classList.remove('border-red-200', 'text-red-500');
+                    toggleBtn.style.borderColor = '';
+                    toggleBtn.style.color = '';
+                    isPasswordVisible = false;
+                    
+                    // Clear password fields when hiding
+                    var currentPwd = document.getElementById('currentPassword');
+                    var newPwd = document.getElementById('newPassword');
+                    var confirmPwd = document.getElementById('confirmNewPassword');
+                    if (currentPwd) currentPwd.value = '';
+                    if (newPwd) newPwd.value = '';
+                    if (confirmPwd) confirmPwd.value = '';
+                }
+            });
+        }
+        
+        // Toggle password visibility for all password fields
+        var toggles = document.querySelectorAll('.password-toggle');
+        for (var i = 0; i < toggles.length; i++) {
+            toggles[i].addEventListener('click', function() {
+                var targetId = this.getAttribute('data-target');
+                var input = document.getElementById(targetId);
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                } else {
+                    input.type = 'password';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

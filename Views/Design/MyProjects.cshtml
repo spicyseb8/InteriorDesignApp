@@ -1,0 +1,83 @@
+@using InteriorDesignApp.Models
+@model List<Project>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>My Projects - 3D Interior Design Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #FFFFFF;
+        }
+        .project-card {
+            background: #F8F9FA;
+            border: 1px solid #F0F0F0;
+            transition: all 0.3s ease;
+        }
+        .project-card:hover {
+            border-color: #FA8112;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen">
+        <!-- Header -->
+        <div class="px-5 pt-8 pb-4">
+            <div class="flex items-center">
+                <a href="/Design/Settings" class="mr-4 text-[#666666] hover:text-[#FA8112] transition-colors">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </a>
+                <h1 class="text-2xl font-bold text-[#222222]">My Projects</h1>
+            </div>
+        </div>
+        
+        <div class="px-5 py-2">
+            @if (!Model.Any())
+            {
+                <div class="text-center py-16">
+                    <div class="w-20 h-20 bg-[#FA8112]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-folder-open text-3xl text-[#FA8112]"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-[#222222]">No Projects Yet</h3>
+                    <p class="text-[#666666] text-sm mt-2">Start designing your first interior project!</p>
+                    <button class="mt-6 bg-[#FA8112] text-white px-6 py-2.5 rounded-xl font-semibold hover:bg-[#e6730f] transition-all shadow-sm">
+                        Create New Project
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="space-y-3 pb-8">
+                    @foreach (var project in Model)
+                    {
+                        <div class="project-card rounded-xl p-4 cursor-pointer">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-semibold text-[#222222]">@project.ProjectName</h3>
+                                    <p class="text-xs text-[#999999] mt-1">Created: @project.CreatedAt.ToString("MMM dd, yyyy")</p>
+                                    @if (!string.IsNullOrEmpty(project.RoomDimensions))
+                                    {
+                                        <p class="text-xs text-[#999999] mt-0.5">Room: @project.RoomDimensions</p>
+                                    }
+                                </div>
+                                <button class="text-[#FA8112] hover:translate-x-1 transition-transform">
+                                    <i class="fas fa-chevron-right text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

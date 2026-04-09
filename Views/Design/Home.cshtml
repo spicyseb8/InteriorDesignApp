@@ -1,0 +1,108 @@
+@{
+    Layout = null;
+    ViewBag.Title = "Home";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>3D Interior Design Planner - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #FFFFFF;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.05);
+            padding-bottom: env(safe-area-inset-bottom);
+            border-top: 1px solid #F0F0F0;
+            z-index: 100;
+        }
+        .nav-item {
+            transition: all 0.3s ease;
+            color: #999999;
+        }
+        .nav-item.active {
+            color: #FA8112;
+        }
+        .nav-item:hover {
+            color: #FA8112;
+        }
+        .content-container {
+            padding-bottom: 100px;
+        }
+        .search-input {
+            background-color: #F8F9FA;
+            border: 1px solid #E8E8E8;
+            transition: all 0.3s ease;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #FA8112;
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(250, 129, 18, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="px-5 pt-8 pb-4">
+        <h1 class="text-3xl font-bold text-[#222222]">Hello, <span class="text-[#FA8112]">@ViewBag.Username</span></h1>
+        <p class="text-[#666666] text-sm mt-1">Let's create your dream space</p>
+    </div>
+    
+    <!-- Search Bar -->
+    <div class="px-5 pb-4">
+        <div class="relative">
+            <i class="fas fa-search absolute left-4 top-3.5 text-[#999999] text-sm"></i>
+            <input type="text" id="searchInput" placeholder="Search designs, furniture, or inspiration..." 
+                   class="search-input w-full pl-11 pr-4 py-3 rounded-xl text-sm transition-all">
+        </div>
+    </div>
+    
+    <!-- Main Content Area -->
+    <div class="content-container px-5 py-8">
+        <div class="text-center py-16">
+            <div class="w-20 h-20 bg-[#FA8112]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-cube text-3xl text-[#FA8112]"></i>
+            </div>
+            <h2 class="text-xl font-semibold text-[#222222]">Coming Soon</h2>
+            <p class="text-[#666666] text-sm mt-2">3D Design workspace is under development.</p>
+            <p class="text-[#999999] text-xs mt-1">Stay tuned for interactive 3D modeling features.</p>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation Bar -->
+    <div class="bottom-nav">
+        <div class="flex justify-around py-3">
+            <a href="/Design/Home" class="nav-item active flex flex-col items-center">
+                <i class="fas fa-home text-xl"></i>
+                <span class="text-xs mt-1 font-medium">Home</span>
+            </a>
+            <a href="/Design/Settings" class="nav-item flex flex-col items-center">
+                <i class="fas fa-user text-xl"></i>
+                <span class="text-xs mt-1 font-medium">Profile</span>
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelectorAll('.nav-item').forEach(item => {
+            if (item.href === window.location.href) {
+                item.classList.add('active');
+            }
+        });
+        
+        document.getElementById('searchInput')?.addEventListener('input', function(e) {
+            console.log('Searching for:', e.target.value);
+        });
+    </script>
+</body>
+</html>

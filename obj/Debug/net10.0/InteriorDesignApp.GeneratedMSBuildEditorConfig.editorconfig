@@ -1,0 +1,87 @@
+is_global = true
+build_property.TargetFramework = net10.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v10.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = InteriorDesignApp
+build_property.RootNamespace = InteriorDesignApp
+build_property.ProjectDir = C:\Users\edwar\OneDrive\Desktop\CAPSTONE\InteriorDesignApp\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\edwar\OneDrive\Desktop\CAPSTONE\InteriorDesignApp
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 10.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Account/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Account/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Account/SignIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTaWduSW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Account/Signup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTaWdudXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Design/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzaWduXEhvbWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Design/MyProjects.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzaWduXE15UHJvamVjdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Design/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzaWduXFByaXZhY3kuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Design/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzaWduXFByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Design/Settings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzaWduXFNldHRpbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Design/Terms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVzaWduXFRlcm1zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/edwar/OneDrive/Desktop/CAPSTONE/InteriorDesignApp/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-5ddhula4cg

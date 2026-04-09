@@ -1,0 +1,154 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sign Up - 3D Interior Design Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #FFFFFF;
+        }
+        .btn-primary {
+            background-color: #FA8112;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #e6730f;
+            box-shadow: 0 4px 12px rgba(250, 129, 18, 0.3);
+        }
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+        input:focus {
+            outline: none;
+            border-color: #FA8112;
+            box-shadow: 0 0 0 3px rgba(250, 129, 18, 0.1);
+        }
+        .hover-underline {
+            position: relative;
+            text-decoration: none;
+        }
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #FA8112;
+            transition: width 0.3s ease;
+        }
+        .hover-underline:hover::after {
+            width: 100%;
+        }
+        input::-ms-reveal,
+        input::-ms-clear {
+            display: none;
+        }
+        input[type="password"]::-webkit-credentials-auto-fill-button,
+        input[type="password"]::-webkit-caps-lock-indicator {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-md w-full">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-[#222222]">Create Account</h1>
+                <p class="text-[#666666] text-sm mt-2">Start designing your dream space</p>
+            </div>
+            
+            @if (TempData["Error"] != null)
+            {
+                <div class="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm">
+                    <i class="fas fa-exclamation-circle mr-2"></i> @TempData["Error"]
+                </div>
+            }
+            
+            <form method="post" action="/Account/SignUp">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <input type="email" name="email" required 
+                           class="w-full px-4 py-3 border border-[#E0E0E0] rounded-xl bg-white focus:border-[#FA8112] transition-all"
+                           placeholder="Email address">
+                </div>
+                
+                <div class="mb-3">
+                    <input type="text" name="username" required 
+                           class="w-full px-4 py-3 border border-[#E0E0E0] rounded-xl bg-white focus:border-[#FA8112] transition-all"
+                           placeholder="Username">
+                </div>
+                
+                <div class="mb-3">
+                    <div class="relative">
+                        <input type="password" name="password" id="password" required 
+                               class="w-full px-4 py-3 border border-[#E0E0E0] rounded-xl bg-white focus:border-[#FA8112] transition-all pr-10"
+                               placeholder="Password (min. 6 characters)">
+                        <i class="fas fa-eye-slash absolute right-3 top-3 text-[#999999] cursor-pointer hover:text-[#FA8112] transition-colors" id="togglePassword"></i>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="relative">
+                        <input type="password" name="confirmPassword" id="confirmPassword" required 
+                               class="w-full px-4 py-3 border border-[#E0E0E0] rounded-xl bg-white focus:border-[#FA8112] transition-all pr-10"
+                               placeholder="Confirm password">
+                        <i class="fas fa-eye-slash absolute right-3 top-3 text-[#999999] cursor-pointer hover:text-[#FA8112] transition-colors" id="toggleConfirmPassword"></i>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary w-full text-white py-3 rounded-xl font-semibold transition-all">
+                    Sign Up
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-[#666666] text-sm">Already have an account? 
+                    <a href="/Account/SignIn" class="text-[#FA8112] font-medium hover-underline">Sign In</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Toggle password visibility for password field
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        
+        togglePassword.addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePassword.classList.remove('fa-eye-slash');
+                togglePassword.classList.add('fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                togglePassword.classList.remove('fa-eye');
+                togglePassword.classList.add('fa-eye-slash');
+            }
+        });
+        
+        // Toggle password visibility for confirm password field
+        const confirmInput = document.getElementById('confirmPassword');
+        const toggleConfirm = document.getElementById('toggleConfirmPassword');
+        
+        toggleConfirm.addEventListener('click', function() {
+            if (confirmInput.type === 'password') {
+                confirmInput.type = 'text';
+                toggleConfirm.classList.remove('fa-eye-slash');
+                toggleConfirm.classList.add('fa-eye');
+            } else {
+                confirmInput.type = 'password';
+                toggleConfirm.classList.remove('fa-eye');
+                toggleConfirm.classList.add('fa-eye-slash');
+            }
+        });
+    </script>
+</body>
+</html>
